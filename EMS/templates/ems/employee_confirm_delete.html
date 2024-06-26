@@ -1,0 +1,15 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}Confirm Delete - {{ employee.user.username }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete employee '{{ employee.name }}'? This action cannot be undone.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'employee_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

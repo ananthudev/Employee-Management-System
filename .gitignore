@@ -1,1 +1,7 @@
 project
+
+ems\__pycache__
+
+my_project\__pycache__
+
+db.sqlite3

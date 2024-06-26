@@ -1,0 +1,26 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}Employee Detail - {{ employee.user.username }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Employee Detail</h1>
+    <dl class="row">
+        <dt class="col-sm-3">S1 No</dt>
+        <dd class="col-sm-9">{{ employee.s1_no }}</dd>
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">{{ employee.name }}</dd>
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">{{ employee.email }}</dd>
+        <dt class="col-sm-3">Phone</dt>
+        <dd class="col-sm-9">{{ employee.phone }}</dd>
+        <dt class="col-sm-3">Role</dt>
+        <dd class="col-sm-9">{{ employee.role }}</dd>
+        <!-- <dt class="col-sm-3">Designation</dt>
+        <dd class="col-sm-9">{{ employee.designation }}</dd> -->
+        <dt class="col-sm-3">Department</dt>
+        <dd class="col-sm-9">{{ employee.department }}</dd>
+    </dl>
+    <a href="{% url 'employee_list' %}" class="btn btn-secondary">Back to Employee List</a>
+</div>
+{% endblock %}

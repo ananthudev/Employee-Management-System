@@ -1,10 +1,47 @@
 {% extends 'ems/base.html' %}
-{% block title %}Employees{% endblock %}
+
+{% block title %}Employee Management{% endblock %}
+
 {% block content %}
-<h1>Employees</h1>
-<ul>
-    {% for employee in employees %}
-    <li><a href="{% url 'employee_detail' employee.pk %}">{{ employee.user.username }}</a></li>
-    {% endfor %}
-</ul>
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <h1>Employee Management</h1>
+        </div>
+        <div class="col text-end">
+            <a href="{% url 'add_employee' %}" class="btn btn-primary">Add New Employee</a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">SL</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Role</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phone }}</td>
+                <td>{{ employee.role }}</td>
+                <td>
+                    <a href="{% url 'employee_detail' employee.pk %}" class="btn btn-info btn-sm">View</a>
+                    <a href="{% url 'update_employee' employee.pk %}" class="btn btn-warning btn-sm">Update</a>
+                    <a href="{% url 'delete_employee' employee.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
 {% endblock %}

@@ -7,5 +7,13 @@
     {% for leave in leaves %}
     <li>{{ leave.employee.user.username }}: {{ leave.start_date }} to {{ leave.end_date }} - {{ leave.status }}</li>
     {% endfor %}
+
+    <h3>aplly for leave button added</h3>
+    <h3>read from db,to read leaves table, added 2 options for leave, reject approved, show them all on the leaves
+        landig page</h3>
+    <h3>have fix the date button in leaves form</h3>
+    <h3>fields needed name of the employee, from date, to date,no of dates, reason, leave type, reason and action </h3>
+    <h3>admin shoudlnt have an option to apply for leave</h3>
+    <h3>for demonstration purposes add a button for applying for leave</h3>
 </ul>
 {% endblock %}

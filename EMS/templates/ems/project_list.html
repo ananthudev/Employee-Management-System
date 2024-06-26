@@ -2,6 +2,16 @@
 {% block title %}Projects{% endblock %}
 {% block content %}
 <h1>Projects</h1>
+<h3>add project details</h3>
+<h3>assign project to employees, read already created employees from db , maybe make a select menu the using drop down
+</h3>
+
+<h3>assign them with a project name, save it to be db</h3>
+
+<h3>read a specific project name from the db, make a drop down menu to see the already listed projects</h3>
+
+<h3>and list the project, foreign key is needed to read the employee details from the employee table</h3>
+
 <ul>
     {% for project in projects %}
     <li><a href="{% url 'project_detail' project.pk %}">{{ project.name }}</a></li>

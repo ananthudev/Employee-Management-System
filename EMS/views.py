@@ -3,20 +3,38 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from .models import Employee, Project, Leave
 from .forms import EmployeeForm, ProjectForm, LeaveForm
 
+# dashboard 
 @login_required
 def dashboard(request):
     return render(request, 'ems/dashboard.html')
 
+# dashboard
+
+# employee operations start 
 @login_required
 def employee_list(request):
     employees = Employee.objects.all()
     return render(request, 'ems/employee_list.html', {'employees': employees})
 
 @login_required
-def employee_detail(request, pk):
+def add_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            employee = form.save(commit=False)
+            employee.user = request.user
+            employee.save()
+            return redirect('employee_list')
+    else:
+        form = EmployeeForm()
+    return render(request, 'ems/employee_form.html', {'form': form})
+
+@login_required
+def update_employee(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
         form = EmployeeForm(request.POST, instance=employee)
@@ -25,7 +43,23 @@ def employee_detail(request, pk):
             return redirect('employee_list')
     else:
         form = EmployeeForm(instance=employee)
-    return render(request, 'ems/employee_detail.html', {'form': form})
+    return render(request, 'ems/employee_form.html', {'form': form})
+
+@login_required
+def delete_employee(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    if request.method == 'POST':
+        employee.delete()
+        return redirect('employee_list')
+    return render(request, 'ems/employee_confirm_delete.html', {'employee': employee})
+
+@login_required
+def employee_detail(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    return render(request, 'ems/employee_detail.html', {'employee': employee})
+
+# employee operations ends here
+
 
 @login_required
 def project_list(request):

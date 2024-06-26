@@ -1,0 +1,16 @@
+<!-- ems/templates/registration/logout_confirm.html -->
+{% extends 'ems/base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Logout</h2>
+    <p>Are you sure you want to logout?</p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Yes, logout</button>
+    </form>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+</div>
+{% endblock %}

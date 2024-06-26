@@ -1,0 +1,44 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}
+{% if form.instance.pk %}
+Update Employee - {{ form.instance.user.username }}
+{% else %}
+Add New Employee
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if form.instance.pk %}Update Employee{% else %}Add New Employee{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+        </div>
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            {{ form.phone.label_tag }}
+            {{ form.phone }}
+        </div>
+        <div class="mb-3">
+            {{ form.role.label_tag }}
+            {{ form.role }}
+        </div>
+        <div class="mb-3">
+            {{ form.designation.label_tag }}
+            {{ form.designation }}
+        </div>
+        <div class="mb-3">
+            {{ form.department.label_tag }}
+            {{ form.department }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'employee_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
