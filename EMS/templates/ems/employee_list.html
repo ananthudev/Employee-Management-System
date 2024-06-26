@@ -1,0 +1,10 @@
+{% extends 'ems/base.html' %}
+{% block title %}Employees{% endblock %}
+{% block content %}
+<h1>Employees</h1>
+<ul>
+    {% for employee in employees %}
+    <li><a href="{% url 'employee_detail' employee.pk %}">{{ employee.user.username }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

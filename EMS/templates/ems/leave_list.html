@@ -1,0 +1,11 @@
+{% extends 'ems/base.html' %}
+{% block title %}Leaves{% endblock %}
+{% block content %}
+<h1>Leaves</h1>
+<a href="{% url 'leave_apply' %}" class="btn btn-primary">Apply for Leave</a>
+<ul>
+    {% for leave in leaves %}
+    <li>{{ leave.employee.user.username }}: {{ leave.start_date }} to {{ leave.end_date }} - {{ leave.status }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
