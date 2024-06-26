@@ -1,0 +1,25 @@
+{% extends 'employees/base.html' %}
+
+{% block title %}Project List{% endblock %}
+
+{% block content %}
+<h1>Project List</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.description }}</td>
+            <td><a href="{% url 'project_detail' project.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
