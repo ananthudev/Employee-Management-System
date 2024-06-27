@@ -3,6 +3,57 @@
 {% block title %}Employee Detail - {{ employee.user.username }}{% endblock %}
 
 {% block content %}
+<style>
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-sm-3 {
+        flex: 0 0 calc(25% - 30px);
+        max-width: calc(25% - 30px);
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .col-sm-9 {
+        flex: 0 0 calc(75% - 30px);
+        max-width: calc(75% - 30px);
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    dt {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    dd {
+        margin-bottom: 10px;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 20px;
+    }
+</style>
+
 <div class="container mt-4">
     <h1>Employee Detail</h1>
     <dl class="row">

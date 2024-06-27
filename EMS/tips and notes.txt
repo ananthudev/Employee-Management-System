@@ -7,6 +7,9 @@ reason
 status
 
 
-1. lOGIN STYLING DONE, added swwt alert 2 pop up
+1. lOGIN STYLING DONE, added sweet alert 2 pop up
 2. base.html done, nav bar. need all min.css cdn to work, cant load static
 3. dashboard complete added chart.js library
+4. employee add and update stylin complete
+5. employee view styling done.
+6. Employee Module styling done

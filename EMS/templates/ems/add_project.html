@@ -3,6 +3,79 @@
 {% block title %}Add Project{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .mb-3 {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .exceed-limit {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -10,10 +83,10 @@
         </div>
     </div>
 
-    <form method="post">
+    <form method="post" id="addProjectForm">
         {% csrf_token %}
         <div class="mb-3">
-            {{ form.name.label_tag }}
+            <label for="id_name">Project Name</label>
             {{ form.name }}
             {% if form.name.errors %}
             <div class="invalid-feedback">
@@ -25,19 +98,25 @@
         </div>
 
         <div class="mb-3">
-            {{ form.employees.label_tag }}
+            <label for="id_employees">Employees</label>
             {{ form.employees }}
             {% if form.employees.errors %}
-            <div class="invalid-feedback d-block">
+            <div class="invalid-feedback">
                 {% for error in form.employees.errors %}
                 {{ error }}
                 {% endfor %}
             </div>
             {% endif %}
+            <!-- <small class="text-muted">Only can select up to 5 employees.</small> -->
+            {% if form.employees.errors %}
+            {% if form.employees.errors|length > 0 %}
+            <small class="exceed-limit">Only can select up to 5 employees.</small>
+            {% endif %}
+            {% endif %}
         </div>
 
         <div class="mb-3">
-            {{ form.start_date.label_tag }}
+            <label for="id_start_date">Start Date</label>
             {{ form.start_date }}
             {% if form.start_date.errors %}
             <div class="invalid-feedback">
@@ -49,7 +128,7 @@
         </div>
 
         <div class="mb-3">
-            {{ form.end_date.label_tag }}
+            <label for="id_end_date">End Date</label>
             {{ form.end_date }}
             {% if form.end_date.errors %}
             <div class="invalid-feedback">
@@ -61,7 +140,7 @@
         </div>
 
         <div class="mb-3">
-            {{ form.priority.label_tag }}
+            <label for="id_priority">Priority</label>
             {{ form.priority }}
             {% if form.priority.errors %}
             <div class="invalid-feedback">
@@ -73,7 +152,7 @@
         </div>
 
         <div class="mb-3">
-            {{ form.task_description.label_tag }}
+            <label for="id_task_description">Task Description</label>
             {{ form.task_description }}
             {% if form.task_description.errors %}
             <div class="invalid-feedback">
@@ -85,7 +164,7 @@
         </div>
 
         <div class="mb-3">
-            {{ form.status.label_tag }}
+            <label for="id_status">Status</label>
             {{ form.status }}
             {% if form.status.errors %}
             <div class="invalid-feedback">
@@ -99,4 +178,5 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
+
 {% endblock %}

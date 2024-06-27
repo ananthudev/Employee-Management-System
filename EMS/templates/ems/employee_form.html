@@ -9,36 +9,94 @@ Add New Employee
 {% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: calc(100% - 10px);
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-group textarea {
+        width: calc(100% - 10px);
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-actions {
+        margin-top: 20px;
+    }
+
+    .form-actions button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .form-actions .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="form-container">
     <h1>{% if form.instance.pk %}Update Employee{% else %}Add New Employee{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="form-group">
             {{ form.name.label_tag }}
             {{ form.name }}
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             {{ form.email.label_tag }}
             {{ form.email }}
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             {{ form.phone.label_tag }}
             {{ form.phone }}
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             {{ form.role.label_tag }}
             {{ form.role }}
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             {{ form.designation.label_tag }}
             {{ form.designation }}
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             {{ form.department.label_tag }}
             {{ form.department }}
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{% url 'employee_list' %}" class="btn btn-secondary">Cancel</a>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
 </div>
 {% endblock %}
