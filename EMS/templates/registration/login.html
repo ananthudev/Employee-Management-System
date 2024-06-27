@@ -1,15 +1,62 @@
-<!-- ems/templates/registration/login.html -->
-{% extends 'ems/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Login{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Employee Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS for styling adjustments -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            /* Bootstrap background color */
+            padding-top: 40px;
+            /* Adjust based on your design */
+        }
 
-{% block content %}
-<div class="container">
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-</div>
-{% endblock %}
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            /* Adjust as per your logo size */
+            height: auto;
+            border-radius: 50%;
+            /* Ensure your logo is round */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo-container">
+                <img src="{% static 'images/logo.png' %}" alt="Logo">
+            </div>
+            <h2 class="text-center mb-4">Welcome to Employee Management System</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies (if needed) -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

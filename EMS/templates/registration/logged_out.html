@@ -1,0 +1,11 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Logged Out</h2>
+    <p>You have been successfully logged out.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+</div>
+{% endblock %}

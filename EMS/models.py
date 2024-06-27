@@ -28,15 +28,42 @@ class Employee(models.Model):
 
 #employee end
 
+
+#projects table
 class Project(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    start_date = models.DateField()
-    end_date = models.DateField()
-    team_members = models.ManyToManyField(Employee, related_name='projects')
+    PRIORITY_CHOICES = [
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('inprogress', 'In Progress'),
+        ('completed', 'Completed'),
+    ]
+
+    name = models.CharField(max_length=200)
+    employees = models.ManyToManyField(Employee)
+    start_date = models.DateField(null=True, blank=False)
+    end_date = models.DateField(null=True, blank=False)
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, null=True, blank=False)
+    task_description = models.TextField(null=True, blank=False)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True, blank=False)
 
     def __str__(self):
         return self.name
+
+#projects table end
+
+
+
+
+
+
+
+
+
 
 class Leave(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
