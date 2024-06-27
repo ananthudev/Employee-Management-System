@@ -1,0 +1,7 @@
+apply date
+Employee Name
+Leave Type - casual sick personal other
+from
+to
+reason
+status

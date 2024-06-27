@@ -18,11 +18,12 @@ urlpatterns = [
     path('projects/<int:pk>/', views.project_detail, name='project_detail'),
     path('projects/<int:pk>/edit/', views.edit_project, name='edit_project'),
     path('projects/<int:pk>/delete/', views.delete_project, name='delete_project'),
-    
-    
-    
+    # done
+      
     # dummy placceholder code, not working
     #need to fix this
     path('leaves/', views.leave_list, name='leave_list'),
-    path('leaves/apply/', views.leave_apply, name='leave_apply'),
+    path('leaves/apply/', views.apply_leave, name='apply_leave'),
+    path('leaves/<int:pk>/approve/', views.approve_leave, name='approve_leave'),
+    path('leaves/<int:pk>/reject/', views.reject_leave, name='reject_leave'),
 ]

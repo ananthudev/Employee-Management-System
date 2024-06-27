@@ -1,19 +1,39 @@
 {% extends 'ems/base.html' %}
-{% block title %}Leaves{% endblock %}
-{% block content %}
-<h1>Leaves</h1>
-<a href="{% url 'leave_apply' %}" class="btn btn-primary">Apply for Leave</a>
-<ul>
-    {% for leave in leaves %}
-    <li>{{ leave.employee.user.username }}: {{ leave.start_date }} to {{ leave.end_date }} - {{ leave.status }}</li>
-    {% endfor %}
+{% load static %}
+{% block title %}Leave List{% endblock %}
 
-    <h3>aplly for leave button added</h3>
-    <h3>read from db,to read leaves table, added 2 options for leave, reject approved, show them all on the leaves
-        landig page</h3>
-    <h3>have fix the date button in leaves form</h3>
-    <h3>fields needed name of the employee, from date, to date,no of dates, reason, leave type, reason and action </h3>
-    <h3>admin shoudlnt have an option to apply for leave</h3>
-    <h3>for demonstration purposes add a button for applying for leave</h3>
-</ul>
+{% block content %}
+<h1>Leave List</h1>
+<a href="{% url 'apply_leave' %}" class="btn btn-primary float-right mb-3">Apply for Leave</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Leave Type</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for leave in leaves %}
+        <tr>
+            <td>{{ leave.employee.name }}</td>
+            <td>{{ leave.get_leave_type_display }}</td>
+            <td>{{ leave.from_date }}</td>
+            <td>{{ leave.to_date }}</td>
+            <td>{{ leave.reason }}</td>
+            <td>{{ leave.get_status_display }}</td>
+            <td>
+                {% if leave.status == 'pending' %}
+                <a href="{% url 'approve_leave' leave.pk %}" class="btn btn-success btn-sm">Approve</a>
+                <a href="{% url 'reject_leave' leave.pk %}" class="btn btn-danger btn-sm">Reject</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

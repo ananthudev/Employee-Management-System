@@ -10,6 +10,8 @@ class EmployeeForm(forms.ModelForm):
         fields = ['name', 'email', 'phone', 'role', 'department']  
         
 # employee form end
+
+#forms for project start
 class ProjectForm(forms.ModelForm):
     employees = forms.ModelMultipleChoiceField(
         queryset=Employee.objects.all(),
@@ -31,7 +33,14 @@ class ProjectForm(forms.ModelForm):
             raise forms.ValidationError("You can select a maximum of 5 employees.")
         return employees
 
+
+#leave form
+
 class LeaveForm(forms.ModelForm):
     class Meta:
         model = Leave
-        fields = ['start_date', 'end_date', 'reason']
+        fields = ['employee', 'leave_type', 'from_date', 'to_date', 'reason']
+        widgets = {
+            'from_date': forms.DateInput(attrs={'type': 'date'}),
+            'to_date': forms.DateInput(attrs={'type': 'date'}),
+        }

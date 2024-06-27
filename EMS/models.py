@@ -56,21 +56,36 @@ class Project(models.Model):
 
 #projects table end
 
-
-
-
-
-
-
-
-
-
+# leaves model start
 class Leave(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    reason = models.TextField()
-    status = models.CharField(max_length=50, choices=(('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')))
+    LEAVE_TYPE_CHOICES = [
+        ('casual', 'Casual'),
+        ('sick', 'Sick'),
+        ('personal', 'Personal'),
+        ('vacation', 'Vacation'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
+    apply_date = models.DateField(auto_now_add=True, null=True)
+    leave_type = models.CharField(max_length=20, choices=LEAVE_TYPE_CHOICES, null=True)
+    from_date = models.DateField(null=True, blank=True)
+    to_date = models.DateField(null=True, blank=True)
+    reason = models.TextField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', null=True)
 
     def __str__(self):
-        return f'{self.employee.user.username} - {self.status}'
+        return f'{self.employee.name} - {self.leave_type}'
+
+    class Meta:
+        verbose_name_plural = "Leaves"
+
+
+
+# leaves model end
+

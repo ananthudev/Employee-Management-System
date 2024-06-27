@@ -1,20 +1,22 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
-from django.urls import reverse_lazy
+from django.urls import reverse
 from .models import Employee, Project, Leave
 from .forms import EmployeeForm, ProjectForm, LeaveForm
 from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
-# dashboard 
+from django.db.models import Count  #for dashboard
+
+
+
+
+# dashboard render
 @login_required
 def dashboard(request):
     return render(request, 'ems/dashboard.html')
 
-# dashboard
 
 # employee operations start 
 @login_required
@@ -118,28 +120,33 @@ def delete_project(request, pk):
 
 #project views end
 
-
-
-
-#dummy place holde code, have to work on it
-
-@login_required
+#dummy place holder code, have to work on it
+# leave view start
 def leave_list(request):
     leaves = Leave.objects.all()
     return render(request, 'ems/leave_list.html', {'leaves': leaves})
 
-@login_required
-def leave_apply(request):
+def apply_leave(request):
     if request.method == 'POST':
         form = LeaveForm(request.POST)
         if form.is_valid():
-            leave = form.save(commit=False)
-            leave.employee = request.user.employee
-            leave.status = 'Pending'
-            leave.save()
+            form.save()
             return redirect('leave_list')
     else:
         form = LeaveForm()
-    return render(request, 'ems/leave_apply.html', {'form': form})
+    return render(request, 'ems/apply_leave.html', {'form': form})
+
+def approve_leave(request, pk):
+    leave = get_object_or_404(Leave, pk=pk)
+    leave.status = 'approved'
+    leave.save()
+    return redirect('leave_list')
+
+def reject_leave(request, pk):
+    leave = get_object_or_404(Leave, pk=pk)
+    leave.status = 'rejected'
+    leave.save()
+    return redirect('leave_list')
+
 
 

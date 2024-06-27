@@ -1,0 +1,13 @@
+{% extends 'ems/base.html' %}
+{% load static %}
+{% block title %}Apply for Leave{% endblock %}
+
+{% block content %}
+<h1>Apply for Leave</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<a href="{% url 'leave_list' %}" class="btn btn-secondary">Back to Leave List</a>
+{% endblock %}
