@@ -9,3 +9,4 @@ status
 
 1. lOGIN STYLING DONE, added swwt alert 2 pop up
 2. base.html done, nav bar. need all min.css cdn to work, cant load static
+3. dashboard complete added chart.js library
