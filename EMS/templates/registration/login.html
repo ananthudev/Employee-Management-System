@@ -3,60 +3,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Employee Management System</title>
-    <!-- Bootstrap CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Custom CSS for styling adjustments -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-            /* Bootstrap background color */
-            padding-top: 40px;
-            /* Adjust based on your design */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Employee Management System</title>
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+  <!-- Custom CSS for styling adjustments -->
+  <style>
+    body {
+      background-color: #eee !important;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
 
-        .login-container {
-            max-width: 400px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
+    .form-signin {
+      max-width: 380px;
+      padding: 15px 35px 45px;
+      margin: 10px auto;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .form-signin-heading {
+      margin-bottom: 30px;
+      text-align: center;
+    }
 
-        .logo-container img {
-            max-width: 200px;
-            /* Adjust as per your logo size */
-            height: auto;
-            border-radius: 50%;
-            /* Ensure your logo is round */
-        }
-    </style>
+    .checkbox {
+      font-weight: normal;
+    }
+
+    .form-control {
+      position: relative;
+      font-size: 16px;
+      height: auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      margin-bottom: 20px;
+      border-radius: 4px;
+      /* Adjust border-radius for consistency */
+    }
+
+    .btn-primary {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .forgot-password-link {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      max-width: 200px;
+      height: auto;
+      border-radius: 50%;
+    }
+  </style>
+  <link rel="icon" href="{% static 'images/logo_tab.png' %}" type="image/png" sizes="32x32" />
 </head>
 
 <body>
-    <div class="container">
-        <div class="login-container">
-            <div class="logo-container">
-                <img src="{% static 'images/logo.png' %}" alt="Logo">
-            </div>
-            <h2 class="text-center mb-4">Welcome to Employee Management System</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
-        </div>
+  <div class="container">
+    <div class="form-signin">
+      <div class="logo-container">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" />
+      </div>
+      <h2 class="form-signin-heading">Employee Management System</h2>
+      <form id="loginForm" method="post">
+        {% csrf_token %}
+        <input type="text" class="form-control" name="username" placeholder="Username" required autofocus />
+        <input type="password" class="form-control" name="password" placeholder="Password" required />
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" />
+          Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Login
+        </button>
+      </form>
+      <a href="#" class="forgot-password-link">Forgot Password?</a>
     </div>
-    <!-- Bootstrap JS and dependencies (if needed) -->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </div>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <!-- SweetAlert2 -->
+  <script src="{% static 'js/sweetalert2@11.js' %}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginForm = document.getElementById('loginForm');
+
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission for demonstration purposes
+
+        // Simulate successful login
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged In Successfully',
+          showConfirmButton: false,
+          timer: 1000
+        }).then(() => {
+          // Uncomment the line below to submit the form after showing SweetAlert
+          loginForm.submit();
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

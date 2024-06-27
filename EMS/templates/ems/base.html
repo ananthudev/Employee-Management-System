@@ -6,6 +6,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/all.min.css' %}"> -->
+    <!-- added font awesome icons for nav bar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Custom Sidebar Styling */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            background-color: #343a40 !important;
+            /* Dark background color */
+            color: #fff !important;
+            /* Light text color */
+            width: 220px;
+            /* Adjust width as needed */
+        }
+
+        #sidebar .nav-link {
+            color: #fff !important;
+            /* White text color */
+            padding: 10px 20px;
+            /* Adjust padding as needed */
+        }
+
+        #sidebar .nav-link:hover {
+            background-color: #495057 !important;
+            /* Darker background color on hover */
+        }
+
+        #sidebar .nav-link.active {
+            background-color: #007bff !important;
+            /* Bootstrap primary color for active link */
+            border-radius: 4px;
+        }
+
+        #sidebar .nav-link.active:hover {
+            background-color: #007bff !important;
+            /* Bootstrap primary color for active link */
+        }
+
+        #sidebar .nav-link img {
+            max-width: 30px;
+            /* Adjust size of logo image */
+            margin-right: 10px;
+            /* Add spacing between image and text */
+            border-radius: 50%;
+            /* Rounded corners for circular image */
+        }
+    </style>
     <title>{% block title %}EMS{% endblock %}</title>
 </head>
 
@@ -16,41 +72,43 @@
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
+                        <!-- Logo Image Link -->
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">
-                                EMS
+                            <a class="nav-link" href="/">
+                                <img src="{% static 'images/logo.png' %}" alt="Logo"> EMS
                             </a>
                         </li>
+                        <!-- Other Navigation Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'dashboard' %}">
-                                Dashboard
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'employee_list' %}">
-                                Manage Employees
+                                <i class="fas fa-users"></i> Manage Employees
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'project_list' %}">
-                                Projects
+                                <i class="fas fa-project-diagram"></i> Projects
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'leave_list' %}">
-                                Leave Management
+                                <i class="fas fa-calendar-times"></i> Leave Management
                             </a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout_confirm' %}">
-                                Logout
+                                <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </li>
                         {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">
-                                Login
+                                <i class="fas fa-sign-in-alt"></i> Login
                             </a>
                         </li>
                         {% endif %}
@@ -69,9 +127,7 @@
     </div>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-
-
-
+    <!-- Additional scripts -->
 </body>
 
 </html>

@@ -76,7 +76,7 @@ def logout(request):
 def logout_confirm(request):
     return render(request, 'registration/logout_confirm.html')
 #login and logout done
-#dont touch above code
+#dont touch above code - Dev, else you will cry
 
 
 #project views start
@@ -149,4 +149,32 @@ def reject_leave(request, pk):
     return redirect('leave_list')
 
 
+@login_required
+def dashboard(request):
+    # Employee Stats
+    total_employees = Employee.objects.count()
+    department_stats = Employee.objects.values('department').annotate(count=Count('department'))
 
+    # Project Stats
+    total_projects = Project.objects.count()
+    projects_pending = Project.objects.filter(status='pending').count()
+    projects_inprogress = Project.objects.filter(status='inprogress').count()
+    projects_completed = Project.objects.filter(status='completed').count()
+
+    # Leave Stats
+    leaves_pending = Leave.objects.filter(status='pending').count()
+    leaves_approved = Leave.objects.filter(status='approved').count()
+    leaves_rejected = Leave.objects.filter(status='rejected').count()
+
+    context = {
+        'total_employees': total_employees,
+        'department_stats': department_stats,
+        'total_projects': total_projects,
+        'projects_pending': projects_pending,
+        'projects_inprogress': projects_inprogress,
+        'projects_completed': projects_completed,
+        'leaves_pending': leaves_pending,
+        'leaves_approved': leaves_approved,
+        'leaves_rejected': leaves_rejected,
+    }
+    return render(request, 'ems/dashboard.html', context)
