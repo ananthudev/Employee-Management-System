@@ -14,3 +14,19 @@ status
 5. employee view styling done.
 6. Employee Module styling done
 7. Projects add styling done, conditional styling addded (RED)
+8. leaves module styling
+9. added js pop up for logout
+
+Things to add - Role base functionality
+
+add a different login for users, if it is user, Differentiate user 
+
+and restrict views for users
+
+customize the dashboard
+idea 💡
+Show a summary of project assigned to them
+show a dashboard graphics of how many sick, vacation , casual leaves left out of 10
+and how many applied
+dont have enough time to finish Things
+
