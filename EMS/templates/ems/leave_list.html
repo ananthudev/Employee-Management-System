@@ -4,7 +4,9 @@
 
 {% block content %}
 <h1>Leave List</h1>
-<a href="{% url 'apply_leave' %}" class="btn btn-primary float-right mb-3">Apply for Leave</a>
+<div class="col text-end">
+    <a href="{% url 'apply_leave' %}" class="btn btn-primary float-right mb-3">Apply for Leave</a>
+</div>
 <table class="table">
     <thead>
         <tr>

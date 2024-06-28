@@ -13,3 +13,4 @@ status
 4. employee add and update stylin complete
 5. employee view styling done.
 6. Employee Module styling done
+7. Projects add styling done, conditional styling addded (RED)

@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-# from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from .models import Employee, Project, Leave
 from .forms import EmployeeForm, ProjectForm, LeaveForm
@@ -13,9 +13,9 @@ from django.db.models import Count  #for dashboard
 
 
 # dashboard render
-@login_required
-def dashboard(request):
-    return render(request, 'ems/dashboard.html')
+# @login_required
+# def dashboard(request):
+#     return render(request, 'ems/dashboard.html')
 
 
 # employee operations start 
@@ -67,27 +67,32 @@ def employee_detail(request, pk):
 # employee operations ends here
 
 #logout 
-def logout(request):
+# def logout(request):
+#     auth_logout(request)
+#     return redirect('login')
+
+
+
+# def logout_confirm(request):
+#     return render(request, 'registration/logout_confirm.html')
+def logout_confirm(request):
     auth_logout(request)
     return redirect('login')
-
-
-
-def logout_confirm(request):
-    return render(request, 'registration/logout_confirm.html')
 #login and logout done
 #dont touch above code - Dev, else you will cry
 
-
+@login_required
 #project views start
 def project_list(request):
     projects = Project.objects.all()
     return render(request, 'ems/project_list.html', {'projects': projects})
 
+@login_required
 def project_detail(request, pk):
     project = get_object_or_404(Project, pk=pk)
     return render(request, 'ems/project_detail.html', {'project': project})
 
+@login_required
 def add_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
@@ -98,6 +103,7 @@ def add_project(request):
         form = ProjectForm()
     return render(request, 'ems/add_project.html', {'form': form})
 
+@login_required
 def edit_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
     if request.method == 'POST':
@@ -109,23 +115,44 @@ def edit_project(request, pk):
         form = ProjectForm(instance=project)
     return render(request, 'ems/edit_project.html', {'form': form})
 
-def delete_project(request, pk):
-    project = get_object_or_404(Project, pk=pk)
+# def delete_project(request, pk):
+#     project = get_object_or_404(Project, pk=pk)
+#     if request.method == 'POST':
+#         project_name = project.name  # Get project name before deleting
+#         project.delete()
+#         messages.success(request, f'Project "{project_name}" has been deleted.')  # Success message
+#         return redirect('project_list')
+#     return render(request, 'ems/delete_project.html', {'project': project})
+
+# @login_required
+# def delete_project(request):
+#     return render(request, 'ems/delete_project.html')
+
+@login_required
+def delete_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+
     if request.method == 'POST':
-        project_name = project.name  # Get project name before deleting
+        # If method is POST, delete the project
         project.delete()
-        messages.success(request, f'Project "{project_name}" has been deleted.')  # Success message
-        return redirect('project_list')
+        return redirect('project_list')  # Redirect to project list after deletion
+
+    
     return render(request, 'ems/delete_project.html', {'project': project})
+    
 
 #project views end
 
 #dummy place holder code, have to work on it
 # leave view start
+@csrf_exempt
+@login_required
 def leave_list(request):
     leaves = Leave.objects.all()
     return render(request, 'ems/leave_list.html', {'leaves': leaves})
 
+@csrf_exempt
+@login_required
 def apply_leave(request):
     if request.method == 'POST':
         form = LeaveForm(request.POST)
@@ -136,19 +163,23 @@ def apply_leave(request):
         form = LeaveForm()
     return render(request, 'ems/apply_leave.html', {'form': form})
 
+
+@login_required
 def approve_leave(request, pk):
     leave = get_object_or_404(Leave, pk=pk)
     leave.status = 'approved'
     leave.save()
     return redirect('leave_list')
 
+@csrf_exempt
+@login_required
 def reject_leave(request, pk):
     leave = get_object_or_404(Leave, pk=pk)
     leave.status = 'rejected'
     leave.save()
     return redirect('leave_list')
 
-
+@csrf_exempt
 @login_required
 def dashboard(request):
     # Employee Stats

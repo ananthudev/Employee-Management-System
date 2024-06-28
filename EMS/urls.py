@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:pk>/delete/', views.delete_employee, name='delete_employee'),
     
     #log out confirm path
+    # path('logout_confirm/', views.logout_confirm, name='logout_confirm'),
     path('logout_confirm/', views.logout_confirm, name='logout_confirm'),
     
         
@@ -20,7 +21,7 @@ urlpatterns = [
     path('projects/add/', views.add_project, name='add_project'),
     path('projects/<int:pk>/', views.project_detail, name='project_detail'),
     path('projects/<int:pk>/edit/', views.edit_project, name='edit_project'),
-    path('projects/<int:pk>/delete/', views.delete_project, name='delete_project'),
+    path('projects/delete/<int:project_id>/', views.delete_project, name='delete_project'),
     # done
       
 #    leaves url

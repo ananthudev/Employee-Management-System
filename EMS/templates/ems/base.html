@@ -102,14 +102,14 @@
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout_confirm' %}">
+                            <a class="nav-link" id="logout-link" href="#">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">
-                                <i class="fas fa-sign-in-alt"></i> Login
+                            <a class="nav-link" id="logout-link" href="#">
+                                <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </li>
                         {% endif %}
@@ -128,7 +128,25 @@
     </div>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <!-- Additional scripts -->
+    <script src="{% static 'js/sweetalert2@11.js' %}"></script>
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be logged out!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{% url 'logout_confirm' %}";
+                }
+            })
+        });
+    </script>
 </body>
 
 </html>
