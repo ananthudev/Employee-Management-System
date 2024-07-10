@@ -17,7 +17,7 @@ status
 8. leaves module styling
 9. added js pop up for logout
 
-Things to add - Role base functionality
+Things to add - Role base functionality - Future enhancement
 
 add a different login for users, if it is user, Differentiate user 
 
